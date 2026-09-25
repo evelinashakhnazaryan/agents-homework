@@ -1,0 +1,7 @@
+{
+  "python": "Python 3.14.4",
+  "tests_returncode": 0,
+  "tests_output": "test_empty_summary_rejected (test_agent.ServiceTests.test_empty_summary_rejected) ... ok\ntest_invalid_data (test_agent.ServiceTests.test_invalid_data) ... ok\ntest_order_and_path_guards (test_agent.ServiceTests.test_order_and_path_guards) ... ok\ntest_real_mcp_and_graph_without_api (test_agent.ServiceTests.test_real_mcp_and_graph_without_api) ... Processing request of type ListToolsRequest\nProcessing request of type CallToolRequest\nProcessing request of type CallToolRequest\nok\ntest_save_cache_and_preserve_source (test_agent.ServiceTests.test_save_cache_and_preserve_source) ... ok\ntest_wrapper_and_integer_id (test_agent.ServiceTests.test_wrapper_and_integer_id) ... ok\n\n----------------------------------------------------------------------\nRan 6 tests in 1.111s\n\nOK\n",
+  "data_sha256": "8c3342c9365652764fbb7b6cef5de252fbcb1df2b6d5cbff4442f0fc3cfde8db",
+  "article_count": 10
+}
