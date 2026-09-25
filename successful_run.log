@@ -1,0 +1,104 @@
+[09/25/26 19:29:56] INFO     Processing request of type            server.py:733
+                             ListToolsRequest                                   
+Tools: read_articles
+[09/25/26 19:29:57] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+Tools: summarize_article
+[09/25/26 19:29:58] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[09/25/26 19:29:59] INFO     HTTP Request: POST                  _client.py:1740
+                             https://api.groq.com/openai/v1/chat                
+                             /completions "HTTP/1.1 200 OK"                     
+Tools: summarize_article
+                    INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[09/25/26 19:30:00] INFO     HTTP Request: POST                  _client.py:1740
+                             https://api.groq.com/openai/v1/chat                
+                             /completions "HTTP/1.1 200 OK"                     
+Tools: summarize_article
+                    INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[09/25/26 19:30:01] INFO     HTTP Request: POST                  _client.py:1740
+                             https://api.groq.com/openai/v1/chat                
+                             /completions "HTTP/1.1 200 OK"                     
+Tools: summarize_article
+                    INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[09/25/26 19:30:02] INFO     HTTP Request: POST                  _client.py:1740
+                             https://api.groq.com/openai/v1/chat                
+                             /completions "HTTP/1.1 200 OK"                     
+Tools: summarize_article
+[09/25/26 19:30:03] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[09/25/26 19:30:04] INFO     HTTP Request: POST                  _client.py:1740
+                             https://api.groq.com/openai/v1/chat                
+                             /completions "HTTP/1.1 200 OK"                     
+Tools: summarize_article
+[09/25/26 19:30:12] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[09/25/26 19:30:13] INFO     HTTP Request: POST                  _client.py:1740
+                             https://api.groq.com/openai/v1/chat                
+                             /completions "HTTP/1.1 429 Too Many                
+                             Requests"                                          
+                    INFO     Retrying request to            _base_client.py:1600
+                             /openai/v1/chat/completions in                     
+                             2.000000 seconds                                   
+[09/25/26 19:30:15] INFO     HTTP Request: POST                  _client.py:1740
+                             https://api.groq.com/openai/v1/chat                
+                             /completions "HTTP/1.1 200 OK"                     
+Tools: summarize_article
+[09/25/26 19:30:25] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             https://api.groq.com/openai/v1/chat                
+                             /completions "HTTP/1.1 429 Too Many                
+                             Requests"                                          
+                    INFO     Retrying request to            _base_client.py:1600
+                             /openai/v1/chat/completions in                     
+                             3.000000 seconds                                   
+[09/25/26 19:30:29] INFO     HTTP Request: POST                  _client.py:1740
+                             https://api.groq.com/openai/v1/chat                
+                             /completions "HTTP/1.1 200 OK"                     
+Tools: summarize_article
+[09/25/26 19:30:39] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             https://api.groq.com/openai/v1/chat                
+                             /completions "HTTP/1.1 429 Too Many                
+                             Requests"                                          
+                    INFO     Retrying request to            _base_client.py:1600
+                             /openai/v1/chat/completions in                     
+                             4.000000 seconds                                   
+[09/25/26 19:30:43] INFO     HTTP Request: POST                  _client.py:1740
+                             https://api.groq.com/openai/v1/chat                
+                             /completions "HTTP/1.1 200 OK"                     
+Tools: summarize_article
+[09/25/26 19:30:53] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[09/25/26 19:30:54] INFO     HTTP Request: POST                  _client.py:1740
+                             https://api.groq.com/openai/v1/chat                
+                             /completions "HTTP/1.1 429 Too Many                
+                             Requests"                                          
+                    INFO     Retrying request to            _base_client.py:1600
+                             /openai/v1/chat/completions in                     
+                             3.000000 seconds                                   
+[09/25/26 19:30:57] INFO     HTTP Request: POST                  _client.py:1740
+                             https://api.groq.com/openai/v1/chat                
+                             /completions "HTTP/1.1 200 OK"                     
+Tools: summarize_article
+[09/25/26 19:31:07] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             https://api.groq.com/openai/v1/chat                
+                             /completions "HTTP/1.1 429 Too Many                
+                             Requests"                                          
+                    INFO     Retrying request to            _base_client.py:1600
+                             /openai/v1/chat/completions in                     
+                             4.000000 seconds                                   
+[09/25/26 19:31:12] INFO     HTTP Request: POST                  _client.py:1740
+                             https://api.groq.com/openai/v1/chat                
+                             /completions "HTTP/1.1 200 OK"                     
+Tools: save_results
+[09/25/26 19:31:23] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+Verified: 10 articles -> /content/agents-homework/results_reproduction/20260925_192949_120b/summaries.json

@@ -138,7 +138,7 @@ def main() -> None:
     """Start stdio server; stdout is reserved for MCP messages."""
     service = ArticleService(Path(os.environ["AGENT_INPUT"]),
                              Path(os.environ["AGENT_OUTPUT"]),
-                             os.environ.get("GROQ_MODEL", "openai/gpt-oss-20b"))
+                             os.environ.get("GROQ_MODEL", "openai/gpt-oss-120b"))
     create_server(service).run(transport="stdio")
 
 

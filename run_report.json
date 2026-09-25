@@ -1,0 +1,35 @@
+{
+  "date": "2026-09-25",
+  "successful_code_commit": "cc73a0702ab19c217673012d7e67ece0d8b987e0",
+  "archive_sha256": "80df102b0d6a41010298925962983de5cbe01b0ef699fa496324600a4d641329",
+  "runs": [
+    {
+      "directory": "20260925_191940_2776d5",
+      "model": "openai/gpt-oss-20b",
+      "success": false,
+      "tool_calls": 5,
+      "error_type": "FileNotFoundError"
+    },
+    {
+      "directory": "20260925_192532_d27e44",
+      "model": "openai/gpt-oss-20b",
+      "success": false,
+      "tool_calls": 7,
+      "error_type": "ExceptionGroup"
+    },
+    {
+      "directory": "20260925_192650_llama",
+      "model": "llama-3.3-70b-versatile",
+      "success": false,
+      "tool_calls": 0,
+      "error_type": "ExceptionGroup"
+    },
+    {
+      "directory": "20260925_192949_120b",
+      "model": "openai/gpt-oss-120b",
+      "success": true,
+      "tool_calls": 12,
+      "error_type": null
+    }
+  ]
+}

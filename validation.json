@@ -1,7 +1,30 @@
 {
-  "python": "Python 3.14.4",
-  "tests_returncode": 0,
-  "tests_output": "test_empty_summary_rejected (test_agent.ServiceTests.test_empty_summary_rejected) ... ok\ntest_invalid_data (test_agent.ServiceTests.test_invalid_data) ... ok\ntest_order_and_path_guards (test_agent.ServiceTests.test_order_and_path_guards) ... ok\ntest_real_mcp_and_graph_without_api (test_agent.ServiceTests.test_real_mcp_and_graph_without_api) ... Processing request of type ListToolsRequest\nProcessing request of type CallToolRequest\nProcessing request of type CallToolRequest\nok\ntest_save_cache_and_preserve_source (test_agent.ServiceTests.test_save_cache_and_preserve_source) ... ok\ntest_wrapper_and_integer_id (test_agent.ServiceTests.test_wrapper_and_integer_id) ... ok\n\n----------------------------------------------------------------------\nRan 6 tests in 1.111s\n\nOK\n",
-  "data_sha256": "8c3342c9365652764fbb7b6cef5de252fbcb1df2b6d5cbff4442f0fc3cfde8db",
-  "article_count": 10
+  "created_at": "2026-09-25T19:36:50.248293+00:00",
+  "python": "3.14.4 (tags/v3.14.4:23116f9, Apr  7 2026, 14:10:54) [MSC v.1944 64 bit (AMD64)]",
+  "checks": [
+    {
+      "command": [
+        "-m",
+        "unittest",
+        "-v",
+        "test_agent"
+      ],
+      "returncode": 0,
+      "stdout": "",
+      "stderr": "test_empty_summary_rejected (test_agent.ServiceTests.test_empty_summary_rejected) ... ok\ntest_invalid_data (test_agent.ServiceTests.test_invalid_data) ... ok\ntest_order_and_path_guards (test_agent.ServiceTests.test_order_and_path_guards) ... ok\ntest_real_mcp_and_graph_without_api (test_agent.ServiceTests.test_real_mcp_and_graph_without_api) ... Processing request of type ListToolsRequest\nProcessing request of type CallToolRequest\nProcessing request of type CallToolRequest\nok\ntest_save_cache_and_preserve_source (test_agent.ServiceTests.test_save_cache_and_preserve_source) ... ok\ntest_wrapper_and_integer_id (test_agent.ServiceTests.test_wrapper_and_integer_id) ... ok\n\n----------------------------------------------------------------------\nRan 6 tests in 1.555s\n\nOK\n"
+    },
+    {
+      "command": [
+        "-m",
+        "pip",
+        "check"
+      ],
+      "returncode": 0,
+      "stdout": "No broken requirements found.\n",
+      "stderr": ""
+    }
+  ],
+  "notebook_code_cells_compile": true,
+  "local_result_verified": true,
+  "groq_key_pattern_scan": "No key pattern in deliverable text files"
 }

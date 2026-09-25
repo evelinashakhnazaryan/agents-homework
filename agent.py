@@ -104,7 +104,7 @@ async def run(input_path: Path, output_path: Path, max_steps: int = 100) -> dict
     trace_path = output_path.with_suffix(".trace.json")
     if trace_path.exists():
         raise FileExistsError(f"Choose a new output path: {trace_path}")
-    model_name = os.getenv("GROQ_MODEL", "openai/gpt-oss-20b")
+    model_name = os.getenv("GROQ_MODEL", "openai/gpt-oss-120b")
     # Pass only necessary environment variables; do not dump environment into logs.
     env = {k: v for k, v in os.environ.items() if k in {
         "PATH", "SystemRoot", "WINDIR", "TEMP", "TMP", "HOME", "USERPROFILE",
