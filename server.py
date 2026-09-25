@@ -53,7 +53,7 @@ class ArticleService:
         self.saved = False
 
     def read_articles(self, path: str) -> dict:
-        """Read the requested JSON. Returns all articles and their IDs. Call first."""
+        """Read JSON and return the article catalog (IDs, titles, lengths). Call first."""
         if Path(path).resolve() != self.input_path:
             raise ValueError("Only the input file specified at launch is allowed")
         if self.articles is None:
@@ -62,7 +62,10 @@ class ArticleService:
             raw = self.input_path.read_bytes()
             self.articles = validate_articles(json.loads(raw.decode("utf-8-sig")))
             self.source_sha256 = hashlib.sha256(raw).hexdigest()
-        return {"count": len(self.articles), "articles": self.articles}
+        return {"count": len(self.articles), "articles": [
+            {"id": a["id"], "title": a.get("title", ""), "characters": len(a["text"])}
+            for a in self.articles
+        ]}
 
     async def summarize_article(self, article_id: str) -> dict:
         """Summarize ONE previously read article by ID using an LLM; caches result."""
@@ -76,12 +79,14 @@ class ArticleService:
             if not isinstance(summary, str) or not summary.strip():
                 raise ValueError("Model returned an empty summary")
             self.summaries[article_id] = summary.strip()
-        return {"id": article_id, "summary": self.summaries[article_id]}
+        return {"id": article_id, "summarized": True,
+                "summary_characters": len(self.summaries[article_id])}
 
     async def generate_summary(self, article: dict) -> str:
         """Separate LangChain/Groq call; source text is data, never instructions."""
-        model = ChatGroq(model=self.model_name, temperature=0, max_tokens=1200,
-                         timeout=90, max_retries=3)
+        options = {"reasoning_effort": "low"} if "gpt-oss" in self.model_name else {}
+        model = ChatGroq(model=self.model_name, temperature=0, max_tokens=2048,
+                         timeout=90, max_retries=6, **options)
         reply = await model.ainvoke([
             SystemMessage(content=(
                 "Суммаризируй статью по-русски в 3–5 предложениях. "

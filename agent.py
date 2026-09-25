@@ -95,8 +95,9 @@ async def run(input_path: Path, output_path: Path, max_steps: int = 100) -> dict
             async with ClientSession(read, write) as session:
                 await session.initialize()
                 tools = await load_mcp_tools(session)
+                options = {"reasoning_effort": "low"} if "gpt-oss" in model_name else {}
                 model = ChatGroq(model=model_name, temperature=0, max_tokens=1500,
-                                 timeout=90, max_retries=3)
+                                 timeout=90, max_retries=6, **options)
                 graph = build_graph(model, tools)
                 request = (f"Обработай все статьи из файла {input_path}. "
                            f"Сохрани результат в {output_path}.")
