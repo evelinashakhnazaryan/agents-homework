@@ -10,6 +10,7 @@ from langchain_core.messages import AIMessage, HumanMessage
 from langchain_mcp_adapters.tools import load_mcp_tools
 from mcp import ClientSession, StdioServerParameters
 from mcp.client.stdio import stdio_client
+from langgraph.errors import GraphRecursionError
 
 from agent import build_graph, verify_output
 from server import ArticleService, validate_articles
@@ -90,15 +91,21 @@ class ServiceTests(unittest.IsolatedAsyncioTestCase):
                 ]
 
                 class ScriptedModel:
+                    last_messages = []
+
                     def bind_tools(self, available):
                         return self
 
                     async def ainvoke(self, messages):
-                        return sequence.pop(0)
+                        self.last_messages = messages
+                        return sequence.pop(0) if sequence else AIMessage(content="")
 
-                graph = build_graph(ScriptedModel(), tools)
-                state = await graph.ainvoke({"messages": [HumanMessage(content="Test")]})
-                replies = [m for m in state["messages"] if m.type == "tool"]
+                model = ScriptedModel()
+                graph = build_graph(model, tools)
+                with self.assertRaises(GraphRecursionError):
+                    await graph.ainvoke({"messages": [HumanMessage(content="Test")]},
+                                        config={"recursion_limit": 10})
+                replies = [m for m in model.last_messages if m.type == "tool"]
                 self.assertEqual(len(replies), 2)
                 self.assertIn("Summarize these IDs", str(replies[1].content))
                 self.assertFalse(self.output.exists())

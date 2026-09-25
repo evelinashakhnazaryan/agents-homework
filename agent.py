@@ -9,7 +9,7 @@ from importlib.metadata import version
 from pathlib import Path
 
 from dotenv import load_dotenv
-from langchain_core.messages import HumanMessage, SystemMessage
+from langchain_core.messages import HumanMessage, SystemMessage, ToolMessage
 from langchain_groq import ChatGroq
 from langchain_mcp_adapters.tools import load_mcp_tools
 from langgraph.graph import END, START, MessagesState, StateGraph
@@ -39,12 +39,40 @@ def build_graph(model, tools):
         ])
         return {"messages": [reply]}
 
+    def route(state: MessagesState):
+        if tools_condition(state) == "tools":
+            return "tools"
+        for message in reversed(state["messages"]):
+            if isinstance(message, ToolMessage) and message.name == "save_results":
+                blocks = message.content
+                texts = [blocks] if isinstance(blocks, str) else [
+                    b.get("text", "") for b in blocks if isinstance(b, dict)
+                ]
+                for value in texts:
+                    try:
+                        payload = json.loads(value)
+                    except (ValueError, TypeError):
+                        continue
+                    if isinstance(payload, dict) and payload.get("saved") is True:
+                        return END
+        return "continue"
+
+    def continue_task(state: MessagesState):
+        return {"messages": [HumanMessage(content=(
+            "Задача ещё не завершена: успешного save_results нет. "
+            "Продолжи обработку оставшихся ID из уже прочитанного каталога. "
+            "Не повторяй готовые статьи. Затем вызови save_results. "
+            "Следующее сообщение должно содержать вызов нужного инструмента."
+        ))]}
+
     graph = StateGraph(MessagesState)
     graph.add_node("agent", call_model)
     graph.add_node("tools", ToolNode(tools, handle_tool_errors=True))
+    graph.add_node("continue", continue_task)
     graph.add_edge(START, "agent")
-    graph.add_conditional_edges("agent", tools_condition, {"tools": "tools", END: END})
+    graph.add_conditional_edges("agent", route, {"tools": "tools", "continue": "continue", END: END})
     graph.add_edge("tools", "agent")
+    graph.add_edge("continue", "agent")
     return graph.compile()
 
 
@@ -109,6 +137,9 @@ async def run(input_path: Path, output_path: Path, max_steps: int = 100) -> dict
                         for message in state.get("messages", []):
                             event = {"node": node, "type": message.type,
                                      "content": message.content}
+                            metadata = getattr(message, "response_metadata", {})
+                            if metadata.get("finish_reason"):
+                                event["finish_reason"] = metadata["finish_reason"]
                             calls = getattr(message, "tool_calls", [])
                             if calls:
                                 event["tool_calls"] = calls
